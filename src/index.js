@@ -1,19 +1,30 @@
 
 module.exports = function makeExchange(currency) {
-    module.exports = function check(str, bracketsConfig) {
-        for (let i = 0; i < str.length; i++) {
-        for (let j = 0; j < bracketsConfig.length; j++)  {
-          if (str[i] == bracketsConfig[j][0] && str[i + 1] == bracketsConfig[j][1]) {
-            str = str.slice(0,i) + str.slice(i+2,str.length);
-              if (str.length == 1) {
-                return false;
-              } else if (str.length == 0) {
-                return true;
-              }
-            i = -1;
-          } 
-        }
+        let exchange = {};
+          if (currency <= 0) 
+          return exchange;
+          if (currency >= 10000) {
+            exchange["error"] = "You are rich, my friend! We don't have so much coins for exchange";
+            return exchange;
+          }
+        let firstElement = currency / 50 ^ 0;
+          if (firstElement !== 0)
+          exchange["H"] = firstElement;
+        currency -= (firstElement * 50);
+        let secondElement = currency / 25 ^ 0;
+          if (secondElement !== 0)
+          exchange["Q"] = secondElement;
+        currency -= (secondElement * 25);
+        let thirdElement = currency / 10 ^ 0;
+          if (thirdElement !== 0)
+          exchange["D"] = thirdElement;
+        currency -= (thirdElement * 10);
+        let fourthElement = currency / 5 ^ 0;
+          if (fourthElement !== 0)
+          exchange["N"] = fourthElement;
+        currency -= (fourthElement * 5);
+        let fifthElement = currency;
+          if (fifthElement !== 0)
+          exchange["P"] = fifthElement;
+        return exchange;
       }
-      return false;
-    }
-}
